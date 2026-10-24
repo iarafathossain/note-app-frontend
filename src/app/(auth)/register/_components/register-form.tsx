@@ -57,8 +57,19 @@ export function RegisterForm() {
           setFormError(result.message);
           return;
         }
+
+        if (!result.data?.user) {
+          setFormError("Registration succeeded, but no user data was returned.");
+          return;
+        }
+
         reset();
-        router.push(ROUTES.dashboard);
+        const targetRoute =
+          result.data.user.role === "ADMIN"
+            ? ROUTES.adminDashboard
+            : ROUTES.userDashboard;
+
+        router.push(targetRoute);
         router.refresh();
       } catch {
         setFormError("Unable to reach the server. Please try again.");
