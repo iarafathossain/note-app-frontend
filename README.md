@@ -4,6 +4,10 @@ Next.js frontend for the Note App.
 
 **Live app:** https://note-app-job-task.iarafathossain.me
 
+## Deployment
+
+Deployed at AWS EC2 with MongoDB Atlas, Nginx reverse proxy, and PM2 process manager.
+
 ## Tech stack
 
 - Next.js 16 with TypeScript
