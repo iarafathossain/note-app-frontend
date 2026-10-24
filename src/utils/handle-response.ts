@@ -4,6 +4,7 @@ type ResponsePayload<T> = {
   message?: string;
   data?: T;
   errorSources?: Array<{ message?: string }>;
+  meta?: IResponseData<T>["meta"];
 };
 
 export async function handleResponse<T>(
@@ -31,5 +32,6 @@ export async function handleResponse<T>(
     success: true,
     message: result.message || "Request successful",
     data: result.data,
+    meta: result.meta,
   };
 }

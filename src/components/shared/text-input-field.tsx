@@ -1,15 +1,20 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { FieldGroup } from "../ui/field";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 
 type TextInputFieldProps = {
   id: string;
   label: string;
   type?: "text" | "email" | "password";
+  field?: "text" | "textarea";
   registration: UseFormRegisterReturn;
   error?: FieldError;
   disabled?: boolean;
@@ -20,6 +25,7 @@ export function TextInputField({
   id,
   label,
   type = "text",
+  field = "text",
   registration,
   error,
   disabled,
@@ -29,24 +35,34 @@ export function TextInputField({
   const inputType = type === "password" && !visible ? "password" : "text";
 
   return (
-    <div className="grid gap-2">
-      <label htmlFor={id} className="text-sm font-medium">
+    <FieldGroup className="grid gap-2">
+      <Label htmlFor={id} className="text-sm font-medium">
         {label}
-      </label>
+      </Label>
       <div className="relative">
-        <input
-          id={id}
-          type={inputType}
-          autoComplete={autoComplete}
-          disabled={disabled}
-          aria-invalid={Boolean(error)}
-          className={cn(
-            "h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
-            type === "password" && "pr-10",
-            error && "border-destructive focus-visible:border-destructive",
-          )}
-          {...registration}
-        />
+        {field === "text" && (
+          <Input
+            id={id}
+            type={inputType}
+            autoComplete={autoComplete}
+            disabled={disabled}
+            aria-invalid={Boolean(error)}
+            className={cn(
+              type === "password" && "pr-10",
+              error && "border-destructive focus-visible:border-destructive",
+            )}
+            {...registration}
+          />
+        )}
+
+        {field === "textarea" && (
+          <Textarea
+            id={id}
+            disabled={disabled}
+            aria-invalid={Boolean(error)}
+            {...registration}
+          />
+        )}
         {type === "password" && (
           <Button
             type="button"
@@ -66,6 +82,6 @@ export function TextInputField({
           {error.message}
         </p>
       )}
-    </div>
+    </FieldGroup>
   );
 }
