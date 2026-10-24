@@ -1,3 +1,4 @@
+import { DashboardLogoutButton } from "@/components/dashboard-logout-button";
 import {
   canAccessNavigation,
   navigationItems,
@@ -23,7 +24,7 @@ export default async function DashboardLayout({
         .replace(/-/g, "+")
         .replace(/_/g, "/");
       role = JSON.parse(atob(normalizedBase64)).role as UserRole;
-    } catch (error) {
+    } catch {
       console.error("Failed to decode token for sidebar");
     }
   }
@@ -34,7 +35,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-64 bg-gray-100 p-4 border-r">
+      <aside className="flex min-h-screen w-64 flex-col border-r bg-gray-100 p-4">
         <nav className="flex flex-col gap-2">
           {visibleLinks.map((link) => (
             <Link
@@ -46,6 +47,9 @@ export default async function DashboardLayout({
             </Link>
           ))}
         </nav>
+        <div className="mt-auto border-t pt-4">
+          <DashboardLogoutButton />
+        </div>
       </aside>
       <main className="flex-1 p-8">{children}</main>
     </div>
