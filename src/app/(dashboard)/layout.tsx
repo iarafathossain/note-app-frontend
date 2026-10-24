@@ -1,4 +1,4 @@
-import { DashboardLogoutButton } from "@/components/dashboard-logout-button";
+import { DashboardLogoutButton } from "@/app/(dashboard)/_components/dashboard-logout-button";
 import { Suspense } from "react";
 import { Sidebar } from "./_components/sidebar";
 

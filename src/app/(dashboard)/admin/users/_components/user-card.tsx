@@ -4,7 +4,7 @@ import { deleteUserAction } from "@/actions/user/delete-user.action";
 import type { ManagedUser } from "@/actions/user/get-users.action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2 } from "lucide-react";
+import { FileText, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { AddUser } from "./add-user-form";
@@ -29,6 +29,15 @@ export function UserCard({ user }: { user: ManagedUser }) {
       <CardHeader className="flex items-center justify-between">
         <CardTitle>{user.name}</CardTitle>
         <div className="flex gap-1">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.push(`/admin/users/${user.id}/post`)}
+            aria-label={`View posts by ${user.name}`}
+            title="View posts"
+          >
+            <FileText className="size-4" />
+          </Button>
           <AddUser user={user} />
           <Button
             type="button"

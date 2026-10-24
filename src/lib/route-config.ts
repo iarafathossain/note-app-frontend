@@ -15,6 +15,10 @@ export type NavigationItem = {
 
 export const userNavigationItems: NavigationItem[] = [
   {
+    label: "User Dashboard",
+    href: ROUTES.userDashboard,
+  },
+  {
     label: "My Notes",
     href: `${ROUTES.userDashboard}/notes`,
   },
@@ -26,12 +30,16 @@ export const userNavigationItems: NavigationItem[] = [
 
 export const adminNavigationItems: NavigationItem[] = [
   {
+    label: "Admin Dashboard",
+    href: ROUTES.adminDashboard,
+  },
+  {
     label: "Manage Users",
     href: `${ROUTES.adminDashboard}/users`,
   },
   {
-    label: "See posts",
-    href: `${ROUTES.adminDashboard}/posts`,
+    label: "See User's group By Interests",
+    href: `${ROUTES.adminDashboard}/users/grouped-by-interests`,
   },
 ];
 
