@@ -6,8 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { logoutAction } from "@/actions/auth/logout.action";
 import {
-  canAccessNavigation,
-  navigationItems,
+  getNavigationItems,
   ROUTES,
   type UserRole,
 } from "@/lib/route-config";
@@ -47,8 +46,7 @@ export function SiteHeader({ user = null }: SiteHeaderProps) {
           Note App
         </Link>
         <nav className="flex items-center gap-2" aria-label="Main navigation">
-          {navigationItems
-            .filter((item) => canAccessNavigation(item, user?.role ?? null))
+          {getNavigationItems(user?.role ?? null)
             .map((item) => (
               <Link
                 key={item.label}

@@ -1,6 +1,5 @@
 import {
-  canAccessNavigation,
-  navigationItems,
+  getNavigationItems,
   UserRole,
 } from "@/lib/route-config";
 import { cookies } from "next/headers";
@@ -24,9 +23,7 @@ export async function Sidebar() {
     }
   }
 
-  const visibleLinks = navigationItems.filter((item) =>
-    canAccessNavigation(item, role),
-  );
+  const visibleLinks = getNavigationItems(role);
 
   return (
     <nav className="flex flex-col gap-2">

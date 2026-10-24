@@ -11,24 +11,27 @@ export type UserRole = "USER" | "ADMIN";
 export type NavigationItem = {
   label: string;
   href: string;
-  roles?: UserRole[];
 };
 
-export const navigationItems: NavigationItem[] = [
+export const userNavigationItems: NavigationItem[] = [
   {
     label: "My Notes",
     href: `${ROUTES.userDashboard}/notes`,
-    roles: ["USER", "ADMIN"],
   },
+  {
+    label: "My Posts",
+    href: `${ROUTES.userDashboard}/post`,
+  },
+];
+
+export const adminNavigationItems: NavigationItem[] = [
   {
     label: "Manage Users",
     href: `${ROUTES.adminDashboard}/users`,
-    roles: ["ADMIN"],
   },
   {
-    label: "All Notes",
-    href: `${ROUTES.adminDashboard}/notes`,
-    roles: ["ADMIN"],
+    label: "See posts",
+    href: `${ROUTES.adminDashboard}/posts`,
   },
 ];
 
@@ -49,7 +52,8 @@ export const isAdminRoute = (pathname: string) =>
 export const isUserRoute = (pathname: string) =>
   pathname.startsWith(ROUTES.userDashboard);
 
-export const canAccessNavigation = (
-  item: NavigationItem,
-  role: UserRole | null,
-) => !item.roles || (role !== null && item.roles.includes(role));
+export const getNavigationItems = (role: UserRole | null): NavigationItem[] => {
+  if (role === "USER") return userNavigationItems;
+  if (role === "ADMIN") return adminNavigationItems;
+  return [];
+};
